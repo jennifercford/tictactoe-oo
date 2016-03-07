@@ -14,7 +14,9 @@ class Computer
     @piece
   end
 
-  def make_move
-    gets.chomp.to_i
+  def move
+    spaces=[1,2,3,4,5,6,7,8,9]
+    move = spaces.sample
+    move
   end
 end
