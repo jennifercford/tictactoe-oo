@@ -1,66 +1,52 @@
+require "pry"
+require "./board"
+require "./human"
+require "./computer"
 
-class Game
-  def greeting
-  puts "Welcome to Tic Tac Toe"
-  puts "Lets Play"
-  puts "Single player Game or Two? Or Watch no players and watch the computer? (0/1/2)"
-  choice = gets.chomp.to_i
-  until ["0","1","2"].include?(choice)
-   puts "Please choose '0','1'or '2'."
-    choice = gets.chomp.to_i
-  end
-  choice
+
+class Game(Board.new, player1, player2)
+def initialize
+  @board = Board.new
+  @player1 = player1
+  @player2 = player2
+  @current_player = @player1
 end
-def game_type
-  if choice == 0
-    @player1 = Computer.new
-    @player2 = Computer.new
-  elsif choice == 1
-    @player1 = Human.new
-    @player2 = Computer.new
-  else
-    @player1 = Human.new
-    @player2 = Human.new
-  end
-end
-  def switch_player(@current_player)
+
+def switch_player
     @current_player == "X" ? "O" : "X" #Does this do what I think?
-  end
-  def take_turn(@board, @current_player)
-  @board.show_board
-  puts "Player #{player}, please choose a space to move to. (1-9)"
-  choice = gets.chomp.to_i
-  until @board.available_moves.include?(choice)
-    puts "You have to choose an available board position. Please pick again."
-    choice = gets.chomp.to_i
-  end
-  choice
 end
 
-  def tic_tac_toe
-    greeting
-    game_type
-    @board = Board.new
-    current_player = @player1
-    until game_over?(@board)
-      move = take_turn(@board, @current_player)
-      @board[move-1] = @current_player
-      switch_player(@current_player) unless game_over?(@board)
-    end
-  ending_script(@current_player,@board)
+def take_turn
+  @board.show_board
+  puts "Player #{@current_player}, please choose a space to move to. (1-9)"
+  @current_player.move
+  until @board.available_moves.include?(move)
+    puts "You have to choose an available board position. Please pick again."
+    @current_player.move
   end
+  @board.place_peice(move, @current_player)
+end
 
-  def ending_script(@current_player,@board)
-    if win?(@board)
+def tic_tac_toe
+    until game_over?
+       take_turn
+       switch_player unless game_over?
+    end
+  ending_script
+end
+
+def game_over?
+    @board.win? || @board.draw?
+end
+def ending_script
+    if @board.win?
       puts "You're awesome #{@current_player}."
-    elsif draw?(@board)
-      puts "At least you didn't lose."
     else
-      puts "You really need to work on that."
+      puts "At least you didn't lose."
     end
     play_again?
-  end
-  def play_again?
+end
+def play_again?
     puts "Want to play agian? (y/n)"
     choice = gets.chomp.downcase.to_s
      until ["y", "n"].include?(choice)
@@ -72,5 +58,6 @@ end
     else
       puts "Thats ok Bye!"
     end
-  end
-tictactoe
+end
+tic_tac_toe
+end

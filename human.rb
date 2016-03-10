@@ -18,7 +18,7 @@ class Human
       @piece
     end
 
-    def make_move
+    def move
       gets.chomp.to_i
     end
 end

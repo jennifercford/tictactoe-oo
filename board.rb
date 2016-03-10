@@ -2,9 +2,13 @@
 class Board
   WINS = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8,],[3,6,9],[1,5,9],
   [3,5,7]]
-
   def initialize
     @board = [1,2,3,4,5,6,7,8,9]
+  end
+
+  def place_peice(move, @current_player)
+    @board[move-1] = @current_player
+    @board
   end
 
   def availible_moves
@@ -14,11 +18,13 @@ class Board
   def draw?
     @board.all? { |piece| piece.is_a?(String) }
   end
+
   def win?
     WINS.any? do |x, y, z|
     @board[x-1] == @board[y-1] && @board[y-1] == @board[z-1]
   end
 end
+
 def show_board
   puts "
     -----------
@@ -28,4 +34,5 @@ def show_board
     -----------
 "
 end
+
 end

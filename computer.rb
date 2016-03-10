@@ -1,10 +1,11 @@
 
 class Computer
-  # def initialize
-  #   @player = @piece
-  # end
-  def choose_piece
+  def initialize
     @pieces = ["X","O"]
+  end
+
+  def choose_piece
+    # @pieces = ["X","O"]
     choice = @pieces.sample
     @pieces.pop(choice)
     @piece = choice
@@ -15,8 +16,7 @@ class Computer
   end
 
   def move
-    spaces=[1,2,3,4,5,6,7,8,9]
-    move = spaces.sample
+    move = rand(1..9)
     move
   end
 end
