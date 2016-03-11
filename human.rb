@@ -1,7 +1,8 @@
 
 class Human
-  def initialize(name)
-    @player = name
+
+  def initialize
+    @peices = ["X","O"]
   end
 
   def choose_piece
@@ -11,6 +12,7 @@ class Human
         puts "Please only choose X or O."
         choice = gets.chomp.upcase
       end
+      # @peices.pop(choice)
       @piece = choice
     end
 

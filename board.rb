@@ -6,12 +6,12 @@ class Board
     @board = [1,2,3,4,5,6,7,8,9]
   end
 
-  def place_peice(move, @current_player)
-    @board[move-1] = @current_player
+  def place_peice(move, current_player)
+    @board[move-1] = current_player
     @board
   end
 
-  def availible_moves
+  def available_moves
     @board.select { |piece| piece.is_a?(Fixnum) }
   end
 

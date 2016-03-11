@@ -7,7 +7,7 @@ class Computer
   def choose_piece
     # @pieces = ["X","O"]
     choice = @pieces.sample
-    @pieces.pop(choice)
+    # @pieces.delete(choice)
     @piece = choice
   end
 
