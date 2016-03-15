@@ -1,15 +1,15 @@
 
 class Computer
-  def initialize
-    @pieces = ["X","O"]
+  def initialize(piece)
+    @piece = piece
+    # @pieces = ["X","O"]
   end
 
-  def choose_piece
-    # @pieces = ["X","O"]
-    choice = @pieces.sample
-    # @pieces.delete(choice)
-    @piece = choice
-  end
+  # def choose_piece
+  #   choice = @pieces.sample
+  #   @pieces.delete(choice)
+  #   @piece = choice
+  # end
 
   def piece
     @piece

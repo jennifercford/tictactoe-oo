@@ -12,15 +12,6 @@ class Game
     @player2 = player2
     @current_player = @player1
   end
-  def choose_a_piece
-    puts "First player"
-    @player1.choose_piece
-    puts "Second Player"
-    @player2.choose_piece
-    until @player2.piece != @player1.piece
-    puts "Please pick another piece"
-    end
-  end
 
   def switch_player
       # @current_player == "X" ? "O" : "X" #Does this do what I think?
@@ -37,14 +28,15 @@ class Game
     move = @current_player.move
     until @board.available_moves.include?(move)
       puts "You have to choose an available board position. Please pick again."
-      @current_player.move
+      move = @current_player.move
+
+      # binding.pry
     end
     piece = @current_player.piece
     @board.place_peice(move, piece)
   end
 
   def tic_tac_toe
-    choose_a_piece
       until game_over?
          take_turn
          switch_player unless game_over?
